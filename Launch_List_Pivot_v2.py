@@ -731,7 +731,6 @@ if __name__=='__main__':
 
     new_main_df_cols['P&S | Distributor'] = new_main_df_cols['P&S | Distributor'].str.replace("|", ",", regex=False)
 
-    result.to_excel(output_path / "bridge_agg.xlsx", index=False)
     new_main_df_cols.to_csv(output_path / "updated_main.csv", index=False)
 
     print("Proceso completado ✅")

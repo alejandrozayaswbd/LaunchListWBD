@@ -176,7 +176,9 @@ def compare_history_vs_snapshot_min(row):
     
     for snap in snap_entries: 
         if snap.__contains__("No Transition"): 
-            changes.append(f"{today} - Removed") 
+            changes.append(f"{today} - No Transition to Max")
+        elif snap.__contains__("Removed"):
+            changes.append(f"{today} - Removed")
         else: 
             changes.append(F"{today} - {snap}") 
     
@@ -618,7 +620,7 @@ if __name__=='__main__':
 
     new_main_df_cols.rename(columns={'🔒Country of Origin':'A | P&S Country of Origin'}, inplace=True)
 
-    new_main_df_cols.loc[(new_main_df_cols['P&S | Kids Age Demo Summary'].notna())&(new_main_df_cols['P&S | Kids Age Demo Summary']!="-"), 'P&S | Kids Age Demo Summary'] = new_main_df_cols.loc[(new_main_df_cols['P&S | Kids Age Demo Summary'].notna())&(new_main_df_cols['P&S | Kids Age Demo Summary']!="-"), 'P&S | Kids Age Demo Summary'].map(lambda x: ",".join(split_region_string(x)))
+    new_main_df_cols.loc[(new_main_df_cols['P&S | Kids Age Demo Summary'].notna())&(new_main_df_cols['P&S | Kids Age Demo Summary']!="-"), 'P&S | Kids Age Demo Summary'] = new_main_df_cols.loc[(new_main_df_cols['P&S | Kids Age Demo Summary'].notna())&(new_main_df_cols['P&S | Kids Age Demo Summary']!="-"), 'P&S | Kids Age Demo Summary'].map(lambda x: ",".join(split_region_string(x.replace("\"",""))))
 
     aux_top = bridge_df[['A | P&S Launch List Unique ID','💯TOP 100 TITLE - LAUNCH',"Region"]].copy()
 
